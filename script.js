@@ -18,13 +18,13 @@ document.getElementById("signupForm")?.addEventListener("submit", function (e) {
   const match = email.match(emailRegex);
 
   if (!match) {
-    message.innerText = "Invalid email adress!";
+    message.innerText = "Invalid email address!";
     return;
   }
 
   const domain = match[1].toLowerCase();
   if (!allowedDomains.includes(domain)) {
-    message.innerText = "Invalid email adress!";
+    message.innerText = "Invalid email address!";
     return;
   }
 
