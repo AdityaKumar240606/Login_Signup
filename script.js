@@ -1,26 +1,3 @@
-document.body.addEventListener('click', (e) => {
-  if (e.target.closest('.container')) {
-    return;
-  }
-
-  const ripple = document.createElement('div');
-  ripple.classList.add('ripple');
-
-  const size = 100;
-  ripple.style.width = ripple.style.height = `${size}px`;
-
-  ripple.style.left = `${e.clientX}px`;
-  ripple.style.top = `${e.clientY}px`;
-
-  document.body.appendChild(ripple);
-
-  ripple.addEventListener('animationend', () => {
-    ripple.remove();
-  });
-});
-
-
-// Signup 
 document.getElementById("signupForm")?.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -30,13 +7,24 @@ document.getElementById("signupForm")?.addEventListener("submit", function (e) {
   const confirmPassword = document.getElementById("confirmPassword").value;
   const message = document.getElementById("signupMessage");
 
+  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com","icloud.com"];
+
   if (!name || !email || !password || !confirmPassword) {
     message.innerText = "Please fill all fields.";
     return;
   }
 
-  if (!email.match(/^\S+@\S+\.\S+$/)) {
-    message.innerText = "Invalid email format.";
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+  const match = email.match(emailRegex);
+
+  if (!match) {
+    message.innerText = "Please enter a valid email address.";
+    return;
+  }
+
+  const domain = match[1].toLowerCase();
+  if (!allowedDomains.includes(domain)) {
+    message.innerText = "Invalid email adress!";
     return;
   }
 
@@ -56,6 +44,7 @@ document.getElementById("signupForm")?.addEventListener("submit", function (e) {
   message.innerText = "Signup successful! Redirecting to login...";
   setTimeout(() => (window.location.href = "index.html"), 1500);
 });
+
 
 
 
