@@ -18,7 +18,7 @@ document.getElementById("signupForm")?.addEventListener("submit", function (e) {
   const match = email.match(emailRegex);
 
   if (!match) {
-    message.innerText = "Please enter a valid email address.";
+    message.innerText = "Invalid email adress!";
     return;
   }
 
